@@ -35,7 +35,7 @@ public class ImageService {
 	private final MemberRepository memberRepository;
 	
 	@Value("${user.path.upload-images}")
-    private String path;
+	private String path;
 
 	@Transactional
 	public ImageDto getImageInfo(Long imageId, Long memberId) {
@@ -68,7 +68,6 @@ public class ImageService {
 	
 	@Transactional
 	public long insertImageInfo(Long memberId, ImageDto imageDto) throws Exception {
-		// �̹��� ����
 		String imagePath = imageDto.getUrl();
 		String fileNm = "";
 		
@@ -86,7 +85,7 @@ public class ImageService {
 			ImageIO.write(bImage, extension, file);
 		} catch (IOException e) {
 			logger.debug(e.toString());
-			throw new IOException("���� ���忡 �����߽��ϴ�.");
+			throw new IOException("파일생성 시 오류가 발생했습니다.");
 		}
 		File rootPath = new File("").getAbsoluteFile();
 		

@@ -33,10 +33,6 @@ public class Member {
 	@Column(name = "member_id")
 	private Long id;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "member")
-	private List<Image> images = new ArrayList<>();
-	
 	@Builder
 	public Member(Long id) {
 		this.id = id;

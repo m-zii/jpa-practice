@@ -33,7 +33,7 @@ public class ImageController {
 	private final ImageService imageService;
 
 	/**
-	 * ��ũ�� �̹��� ����ȸ
+	 * 스크랩 이미지 상세조회
 	 */
 	@GetMapping("/get")
 	public ResponseEntity<Object> getImageInfo(@RequestParam(value="image_id") Long imageId, @RequestParam(value="member_id") Long memberId) {
@@ -46,9 +46,9 @@ public class ImageController {
 			return new ResponseEntity<>(Collections.singletonMap("error", "Server Error"), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	/**
-	 * ��ũ�� �̹��� �����ȸ
+	 * 스크랩 이미지 목록조회
 	 */
 	@GetMapping("/list")
 	public ResponseEntity<Object> getImageList(@RequestParam(value="member_id") Long memberId, @PageableDefault(page = 1, size = 10) PageRequest pageRequest) {
@@ -61,15 +61,15 @@ public class ImageController {
 			return new ResponseEntity<>(Collections.singletonMap("error", "Server Error"), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	/**
-	 * ��ũ�� �̹��� ������ ����
+	 * 스크랩 이미지 데이터 삭제
 	 */
 	@DeleteMapping("/remove")
 	public ResponseEntity<Map<String, Object>> deleteImageInfo(@RequestParam(value="member_id") Long memberId) {
 		try {
 			long result = imageService.deleteImageInfo(memberId);
-            return new ResponseEntity<>(Collections.singletonMap("deleted cnt", result), HttpStatus.OK);
+			return new ResponseEntity<>(Collections.singletonMap("deleted cnt", result), HttpStatus.OK);
 		} catch (EntityNotFoundException e) {
 			return new ResponseEntity<>(Collections.singletonMap("error", "Cannot Find Infomation"), HttpStatus.UNAUTHORIZED);
 		} catch (Exception e) {
@@ -77,16 +77,16 @@ public class ImageController {
 			return new ResponseEntity<>(Collections.singletonMap("error", "Server Error"), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	
+
+
 	/**
-	 * ��ũ�� �̹��� ������ ����
+	 * 스크랩 이미지 데이터 수정
 	 */
 	@PatchMapping("/modify")
 	public ResponseEntity<Map<String, Object>> updateImageInfo(@RequestParam(value="image_id") Long imageId, @RequestParam(value="member_id") Long memberId, @RequestBody ImageDto imageDto) {
 		try {
 			long result = imageService.updateImageInfo(imageId, memberId, imageDto);
-            return new ResponseEntity<>(Collections.singletonMap("updated cnt", result), HttpStatus.OK);
+			return new ResponseEntity<>(Collections.singletonMap("updated cnt", result), HttpStatus.OK);
 		} catch (EntityNotFoundException e) {
 			return new ResponseEntity<>(Collections.singletonMap("error", "Cannot Find Infomation"), HttpStatus.UNAUTHORIZED);
 		} catch (Exception e) {
@@ -94,9 +94,9 @@ public class ImageController {
 			return new ResponseEntity<>(Collections.singletonMap("error", "Server Error"), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	/**
-	 * ��ũ�� �̹��� ����
+	 * 스크랩 이미지 생성
 	 */
 	@PostMapping("/create")
 	public ResponseEntity<Map<String, Object>> insertImageInfo(@RequestParam(value="member_id") Long memberId, @RequestBody ImageDto imageDto) {
