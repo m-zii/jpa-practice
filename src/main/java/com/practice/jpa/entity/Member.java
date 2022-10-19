@@ -32,6 +32,10 @@ public class Member {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MEMBER_SEQ_GENERATOR")
 	@Column(name = "member_id")
 	private Long id;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "member")
+	private List<Image> images = new ArrayList<>();
 	
 	@Builder
 	public Member(Long id) {
